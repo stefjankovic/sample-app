@@ -1,13 +1,26 @@
-version: '3.1'
+version: '3.8'
 
 services:
-
   db:
     image: postgres
-    restart: always
+    env_file: ./.env
     ports:
-      - "5432:5432"
+      - "${POSTGRESS_LOCAL_PORT}:${POSTGRESS_DOCKER_PORT}"
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: sample
+      POSTGRES_USER: $POSTGRESS_USERNAME
+      POSTGRES_PASSWORD: $POSTGRESS_PASSWORD
+      POSTGRES_DB: $POSTGRESS_DB_NAME
+
+  app:
+    depends_on:
+      - db
+    build: ./
+    env_file: ./.env
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:postgresql://db:$POSTGRESS_DOCKER_PORT/$POSTGRESS_DB_NAME",
+        "spring.datasource.username" : "$POSTGRESS_USERNAME",
+        "spring.datasource.password" : "$POSTGRESS_PASSWORD"
+      }'
