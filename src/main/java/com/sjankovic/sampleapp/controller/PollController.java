@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/v1/polls")
 public class PollController {
 
-    private PollService pollService;
+    private final PollService pollService;
 
     public PollController(PollService pollService) {
         this.pollService = pollService;
