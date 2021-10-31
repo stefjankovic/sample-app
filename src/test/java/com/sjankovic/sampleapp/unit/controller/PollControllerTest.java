@@ -11,12 +11,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -40,7 +38,7 @@ public class PollControllerTest {
         Mockito.when(pollService.getPollsCreatedByUser(Mockito.anyString())).thenReturn(polls);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(POLL_CONTROLLER_PATH + "/initiator")
-                .param("initiatorEmail","Qui sont les superhéros Marvel les plus oufs?")
+                .param("initiatorEmail",TestUtils.INITIATOR_EMAIL_TEST_EXAMPLE)
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -3,7 +3,6 @@ package com.sjankovic.sampleapp.unit.util;
 import com.sjankovic.sampleapp.entities.Initiator;
 import com.sjankovic.sampleapp.entities.Participant;
 import com.sjankovic.sampleapp.entities.Poll;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class TestUtils {
+
+    public static final String INITIATOR_EMAIL_TEST_EXAMPLE = "mh+sample@doodle.com";
 
     public static Poll createPoll() {
         Poll poll = new Poll();
